@@ -19,6 +19,20 @@ db_schema:
       type: datetime
     server: full
     title: Feedback
+  files:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: path
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: file
+      type: media
+    - admin_ui: {order: 2, width: 200}
+      name: file_version
+      type: string
+    server: full
+    title: Files
 dependencies: []
 exported_table_schema:
 - client: none
@@ -44,11 +58,12 @@ exported_table_schema:
   python_name: feedback
   server: full
 metadata: {}
-name: Feedback Form 1
-package_name: Feedback_Form_1
+name: Jugendherberge
+package_name: Jugendherberge
 renamed: true
 runtime_options:
   client_version: '3'
+  server_persist: true
   server_spec: {base: python310-minimal}
   server_version: python3-sandbox
   version: 2
@@ -59,4 +74,7 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/anvil/email.yml
+- client_config: {}
+  server_config: {file_table: files}
+  source: /runtime/services/anvil/files.yml
 startup_form: HomeForm
