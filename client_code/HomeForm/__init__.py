@@ -16,6 +16,7 @@ class HomeForm(HomeFormTemplate):
     self.drop_down_1.items = [("Satteins", 0), ("Mordor", 1)]
     print(anvil.server.call("say_hello", "sauron"))
     print(anvil.server.call("get_jugendherbergen"))
+    print(anvil.server.call("get_zimmer", "JID"))
 
     self.drop_down_1.items = anvil.server.call('get_jugendherbergen', "name, JID")
     
