@@ -11,21 +11,13 @@ class HomeForm(HomeFormTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
-
     
     print(anvil.server.call("say_hello", "sauron"))
     print(anvil.server.call("get_jugendherbergen"))
-    
-    
-    
     self.drop_down_1.items = anvil.server.call('get_jugendherbergen', "name, JID")
     print(self.drop_down_1.items[self.drop_down_1.selected_value-1])
 
     self.drop_down_1_change()
-    
-
-  
 
   def drop_down_1_change(self, **event_args):
     jid = self.drop_down_1.items[self.drop_down_1.selected_value - 1][1]
@@ -39,3 +31,4 @@ class HomeForm(HomeFormTemplate):
 
     pass
 
+  
