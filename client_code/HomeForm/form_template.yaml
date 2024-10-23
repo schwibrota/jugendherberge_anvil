@@ -13,9 +13,10 @@ components:
     name: data_grid_1
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: zimmernummer, expand: false, id: JKSDUP, title: Zimmernummer, width: 195}
+      - {data_key: personen, expand: false, id: VJQQOR, title: Mögliche Personen, width: 200}
+      - {data_key: preis, expand: false, id: OJLQEN, title: Preis, width: 138}
+      - {data_key: gebucht, expand: false, id: OWYQMI, title: 'Gebucht?', width: 211}
     type: DataGrid
   layout_properties: {slot: default}
   name: content_panel
@@ -29,6 +30,15 @@ components:
   name: title_lbl
   properties: {text: Feedback}
   type: Label
+- components:
+  - layout_properties: {grid_position: 'JXKVTF,OIQWUR'}
+    name: drop_down_2
+    properties: {}
+    type: DropDown
+  layout_properties: {slot: left-nav}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate

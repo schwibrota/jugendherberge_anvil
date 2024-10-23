@@ -13,18 +13,29 @@ class HomeForm(HomeFormTemplate):
 
     # Any code you write here will run before the form opens.
 
-    self.drop_down_1.items = [("Satteins", 0), ("Mordor", 1)]
+    
     print(anvil.server.call("say_hello", "sauron"))
     print(anvil.server.call("get_jugendherbergen"))
-    print(anvil.server.call("get_zimmer", "JID"))
-
+    
+    
+    
     self.drop_down_1.items = anvil.server.call('get_jugendherbergen', "name, JID")
+    print(self.drop_down_1.items[self.drop_down_1.selected_value-1])
+
+    self.drop_down_1_change()
     
 
   
 
   def drop_down_1_change(self, **event_args):
-    """This method is called when an item is selected"""
-    print(self.drop_down_1.items[self.drop_down_1.selected_value - 1][1])
+    jid = self.drop_down_1.items[self.drop_down_1.selected_value - 1][1]
+    items = anvil.server.call('get_zimmer', jid, "zimmernummer, bettenanzahl, preis_pro_nacht")
+
+    toAdd = []
+    for item in items:
+      temp = {'zimmernummer':item[0], 'personen':item[1], 'preis':item[2]}
+      toAdd.append(temp)
+    self.repeating_panel_1.items = toAdd
+
     pass
 
