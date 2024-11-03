@@ -9,10 +9,10 @@ from datetime import date
 
 class HomeForm(HomeFormTemplate):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
+   
     self.init_components(**properties)
     self.date_picker_1.min_date = date.today()
-    
+    self.date_picker_1.date = date.today()
     self.date_picker_2.min_date = date.today()
 
     
@@ -49,4 +49,8 @@ class HomeForm(HomeFormTemplate):
     self.date_picker_2.min_date = self.date_picker_1.date
     pass
 
-  
+  def button_1_click(self, **event_args):
+    if self.date_picker_1.date:
+      if self.date_picker_2.date:
+        open_form('Form1', self.date_picker_1.date, self.date_picker_2.date, self.drop_down_3.items[self.drop_down_3.selected_value][1])
+    pass

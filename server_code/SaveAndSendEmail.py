@@ -50,10 +50,18 @@ def get_gaeste(rows="*"):
 def get_ungebuchte_zimmer():
   conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
   cursor = conn.cursor()
-  res = list(cursor.execute("SELECT ZID, zimmernummer FROM zimmer"))
+  res = list(cursor.execute("SELECT ZID, zimmernummer FROM zimmer WHERE gebucht = 0"))
   conn.close()
   gesamt = []
   for i in range(len(res)):
     temp = (f'{res[i][1]}', res[i][0])
     gesamt.append(temp)
   return gesamt
+
+@anvil.server.callable
+def get_preis_from_zid(zid):
+  conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
+  cursor = conn.cursor()
+  res = list(cursor.execute(f"SELECT zimmernummer, preis_pro_nacht FROM zimmer WHERE ZID = {zid}"))
+  conn.close()
+  return res

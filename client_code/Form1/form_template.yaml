@@ -1,0 +1,21 @@
+components:
+- layout_properties: {grid_position: 'FKJZGX,DDMZWZ'}
+  name: headline_1
+  properties: {icon: 'fa:arrow-circle-right', role: headline, text: Deine Buchung}
+  type: Label
+- layout_properties: {grid_position: 'ARVAEY,IGZRWS'}
+  name: label_1
+  properties:
+    text: |-
+      Startdatum:
+      Enddatum:
+      Zimmer:
+      Preis insg.:
+  type: Label
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'EDYQNG,HLTFUD'}
+  name: button_1
+  properties: {icon: 'fa:bitcoin', text: BUCHEN 👍}
+  type: Button
+container: {type: ColumnPanel}
+is_package: true
