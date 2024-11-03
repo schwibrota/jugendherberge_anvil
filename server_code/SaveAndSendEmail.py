@@ -31,3 +31,21 @@ def get_zimmer(jid,rows="*"):
   res = list(cursor.execute(f"SELECT {rows} FROM zimmer WHERE JID = {jid}"))
   conn.close()
   return res
+@anvil.server.callable
+def get_gaeste(rows="*"):
+  conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
+  cursor = conn.cursor()
+  res = list(cursor.execute(f"SELECT {rows} FROM gast"))
+  conn.close()
+  return res
+@anvil.server.callable
+def gaestelistezuname_string(gaeste):
+  templiste = []
+  temp = ""
+  for i in gaeste:
+    temp += i[0]
+    temp += " "
+    temp += i[1]
+    templiste.append(temp)
+    temp = ""
+  return templiste
