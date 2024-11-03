@@ -41,7 +41,8 @@ class HomeForm(HomeFormTemplate):
     pass
 
   def drop_down_2_change(self, **event_args):
-    
+    print(anvil.server.call('get_ungebuchte_zimmer'))
+    self.drop_down_3.items = anvil.server.call('get_ungebuchte_zimmer')
     pass
 
   def date_picker_1_change(self, **event_args):

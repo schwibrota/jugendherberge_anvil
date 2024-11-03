@@ -36,9 +36,13 @@ components:
     name: drop_down_2
     properties: {}
     type: DropDown
-  - layout_properties: {grid_position: 'SOSILQ,TYGOXP'}
-    name: label_1
-    properties: {text: Buchen Sie hier ⬇️}
+  - layout_properties: {grid_position: 'HTIFQN,XJKRLB'}
+    name: headline_1
+    properties: {role: headline, text: Hier buchen ⬇️}
+    type: Label
+  - layout_properties: {grid_position: 'BLQIVO,XCSSCF'}
+    name: label_2
+    properties: {text: Startdatum}
     type: Label
   - data_bindings: []
     event_bindings: {change: date_picker_1_change}
@@ -46,10 +50,18 @@ components:
     name: date_picker_1
     properties: {min_date: ''}
     type: DatePicker
+  - layout_properties: {grid_position: 'SSHOWD,EIUGYQ'}
+    name: label_3
+    properties: {text: Enddatum}
+    type: Label
   - layout_properties: {grid_position: 'POUAAG,PLQQET'}
     name: date_picker_2
     properties: {min_date: ''}
     type: DatePicker
+  - layout_properties: {grid_position: 'EBAOMV,RAHCOS'}
+    name: label_4
+    properties: {text: Zimmer}
+    type: Label
   - layout_properties: {grid_position: 'PZOVUH,MYYYYV'}
     name: drop_down_3
     properties: {}

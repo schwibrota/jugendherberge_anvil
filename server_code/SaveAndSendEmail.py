@@ -50,6 +50,10 @@ def get_gaeste(rows="*"):
 def get_ungebuchte_zimmer():
   conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
   cursor = conn.cursor()
-  res = list(cursor.execute("SELECT zimmernummer FROM zimmer"))
+  res = list(cursor.execute("SELECT ZID, zimmernummer FROM zimmer"))
   conn.close()
-  return res
+  gesamt = []
+  for i in range(len(res)):
+    temp = (f'{res[i][1]}', res[i][0])
+    gesamt.append(temp)
+  return gesamt
