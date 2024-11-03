@@ -4,20 +4,30 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from datetime import date
 
 
 class HomeForm(HomeFormTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.date_picker_1.min_date = date.today()
+    
+    self.date_picker_2.min_date = date.today()
 
     
+    print(anvil.server.call('get_gaeste'))
     self.drop_down_1.items = anvil.server.call('get_jugendherbergen', "name, JID")
-    self.drop_down_2.items = anvil.server.call('gaestelistezuname_string', anvil.server.call('get_gaeste', "vorname, nachname"))
+    self.drop_down_2.items = anvil.server.call('get_gaeste')
     print(self.drop_down_1.items[self.drop_down_1.selected_value-1])
+    
 
     self.drop_down_1_change()
 
+
+    
+
+  
   def drop_down_1_change(self, **event_args):
     jid = self.drop_down_1.items[self.drop_down_1.selected_value - 1][1]
     items = anvil.server.call('get_zimmer', jid, "zimmernummer, bettenanzahl, preis_pro_nacht")
@@ -28,6 +38,14 @@ class HomeForm(HomeFormTemplate):
       toAdd.append(temp)
     self.repeating_panel_1.items = toAdd
 
+    pass
+
+  def drop_down_2_change(self, **event_args):
+    
+    pass
+
+  def date_picker_1_change(self, **event_args):
+    self.date_picker_2.min_date = self.date_picker_1.date
     pass
 
   

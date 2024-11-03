@@ -24,6 +24,7 @@ def get_jugendherbergen(rows="*"):
   cursor = conn.cursor()
   res = list(cursor.execute(f"SELECT {rows} FROM jugendherbergen"))
   return res
+  
 @anvil.server.callable
 def get_zimmer(jid,rows="*"):
   conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
@@ -31,21 +32,24 @@ def get_zimmer(jid,rows="*"):
   res = list(cursor.execute(f"SELECT {rows} FROM zimmer WHERE JID = {jid}"))
   conn.close()
   return res
+  
 @anvil.server.callable
 def get_gaeste(rows="*"):
   conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
   cursor = conn.cursor()
   res = list(cursor.execute(f"SELECT {rows} FROM gast"))
   conn.close()
-  return res
+  gesamt = []
+  for i in range(len(res)):
+    temp = (f"{res[i][1]} {res[i][2]}", res[i][0])
+    gesamt.append(temp)
+  return gesamt
+
+
 @anvil.server.callable
-def gaestelistezuname_string(gaeste):
-  templiste = []
-  temp = ""
-  for i in gaeste:
-    temp += i[0]
-    temp += " "
-    temp += i[1]
-    templiste.append(temp)
-    temp = ""
-  return templiste
+def get_ungebuchte_zimmer():
+  conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
+  cursor = conn.cursor()
+  res = list(cursor.execute("SELECT zimmernummer FROM zimmer"))
+  conn.close()
+  return res
