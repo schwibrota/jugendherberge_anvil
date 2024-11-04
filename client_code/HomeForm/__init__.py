@@ -52,7 +52,7 @@ class HomeForm(HomeFormTemplate):
   def button_1_click(self, **event_args):
     if self.date_picker_1.date:
       if self.date_picker_2.date:
-        print(self.drop_down_3.items[self.drop_down_3.selected_value-2][1])
-        print(self.drop_down_3.selected_value-2)
+        print(self.drop_down_3.items[self.drop_down_3.selected_value-1][1])
+        print(self.drop_down_3.selected_value-1)
         open_form('Form1', self.date_picker_1.date, self.date_picker_2.date, self.drop_down_3.items[self.drop_down_3.selected_value-2][1])
     pass
