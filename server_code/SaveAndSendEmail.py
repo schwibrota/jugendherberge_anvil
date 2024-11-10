@@ -65,3 +65,14 @@ def get_preis_from_zid(zid):
   res = list(cursor.execute(f"SELECT zimmernummer, preis_pro_nacht FROM zimmer WHERE ZID = {zid}"))
   conn.close()
   return res
+
+@anvil.server.callable
+def save_booking(startdate, enddate, gid, zid):
+  conn = sqlite3.connect(data_files['jugendherbergen_verwaltung.db'])
+  cursor = conn.cursor()
+  cursor.execute(f"INSERT INTO buchung (startdatum, enddatum, gast_id, zid) VALUES ({startdate}, {enddate}, {gid}, {zid})")
+  cursor.execute(f"UPDATE zimmer SET gebucht = 1 WHERE ZID = {zid}")
+  # Immer wenn ich das Gebucht auf 1 Setze, wird es zwar übernommen, wenn ich es printe, doch wenn ich es in einer anderen Funktion abfrage,
+  # wird es immer noch als 0 interpretiert...
+  print(list(cursor.execute(f"SELECT * FROM zimmer WHERE ZID = {zid}")))
+  conn.close()

@@ -15,6 +15,7 @@ class HomeForm(HomeFormTemplate):
     self.date_picker_1.date = date.today()
     self.date_picker_2.min_date = date.today()
 
+    self.drop_down_3.items = anvil.server.call('get_ungebuchte_zimmer')
     
     print(anvil.server.call('get_gaeste'))
     self.drop_down_1.items = anvil.server.call('get_jugendherbergen', "name, JID")
@@ -50,9 +51,12 @@ class HomeForm(HomeFormTemplate):
     pass
 
   def button_1_click(self, **event_args):
+    print(self.drop_down_2.selected_value)
     if self.date_picker_1.date:
       if self.date_picker_2.date:
-        print(self.drop_down_3.items[self.drop_down_3.selected_value-1][1])
-        print(self.drop_down_3.selected_value-1)
-        open_form('Form1', self.date_picker_1.date, self.date_picker_2.date, self.drop_down_3.items[self.drop_down_3.selected_value-2][1])
+        anvil.server.call('save_booking', self.date_picker_1.date, self.date_picker_2.date, self.drop_down_2.selected_value, self.drop_down_3.selected_value)
+
+    print(anvil.server.call('get_ungebuchte_zimmer'))
+    self.drop_down_3.items.clear()
+    self.drop_down_3.items = anvil.server.call('get_ungebuchte_zimmer')
     pass
